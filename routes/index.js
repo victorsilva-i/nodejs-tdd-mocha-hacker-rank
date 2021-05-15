@@ -10,12 +10,32 @@ router.get('/', function (req, res, next) {
 router.post('/reminders', async function (req, res, next) {
   try {
     const reminderCreated = await reminders.create(req);
-    res.status(200).send(reminderCreated)
+    res.status(201).send(reminderCreated)
   }
   catch (error) {
     console.log(error)
   }
+});
 
+router.get('/reminders', async function (req, res, next) {
+  try {
+    const reminderList = await reminders.getAll(req);
+    res.status(200).send(reminderList)
+  }
+  catch (error) {
+    console.log(error)
+  }
+});
+
+
+router.get('/reminders/:id', async function (req, res, next) {
+  try {
+    const reminder = await reminders.getById(req);
+    res.status(200).send(reminder)
+  }
+  catch (error) {
+    console.log(error)
+  }
 });
 
 module.exports = router;
